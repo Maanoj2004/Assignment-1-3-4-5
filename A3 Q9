@@ -1,0 +1,28 @@
+
+#include <stdio.h>
+
+void copyArray(int *arr1, int *arr2, int size) {
+    for(int i=0; i<size; i++) {
+        *(arr2+i) = *(arr1+i);
+    }
+}
+
+int main() {
+    int arr1[] = {1, 2, 3, 4, 5};
+    int arr2[5];
+    int size = sizeof(arr1)/sizeof(int);
+
+    copyArray(arr1, arr2, size);
+
+    printf("Elements of arr1: ");
+    for(int i=0; i<size; i++) {
+        printf("%d ", arr1[i]);
+    }
+
+    printf("\nElements of arr2: ");
+    for(int i=0; i<size; i++) {
+        printf("%d ", arr2[i]);
+    }
+
+    return 0;
+}
