@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main()
+{
+    char str[100];
+    int sum = 0, i = 0;
+
+    printf("Enter a string: ");
+    gets(str);
+
+    while (str[i] != '\0')
+    {
+        sum += str[i];
+        i++;
+    }
+
+    printf("Sum of ASCII values of all characters in the string: %d", sum);
+
+    return 0;
+}
