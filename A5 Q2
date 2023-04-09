@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+#define MAX_RECORDS 1000
+#define RECORD_SIZE 20
+
+int main() {
+    FILE *data_file = fopen("data.bin", "rb");
+
+    if (data_file == NULL) {
+        printf("Error opening file.\n");
+        return 1;
+    }
+
+    int record_count = 0;
+    char records[MAX_RECORDS][RECORD_SIZE];
+
+    // Read data from the file
+    while (fread(records[record_count], RECORD_SIZE, 1, data_file) == 1) {
+        record_count++;
+    }
+
+    fclose(data_file);
+
+    // Print the data in human-readable format
+    printf("Data in the file:\n");
+    for (int i = 0; i < record_count; i++) {
+        printf("Record %d: %s\n", i+1, records[i]);
+    }
+
+    return 0;
+}
