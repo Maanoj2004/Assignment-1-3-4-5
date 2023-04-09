@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_LINE_LENGTH 256
+
+int main() {
+    char filename[MAX_LINE_LENGTH];
+    char search_string[MAX_LINE_LENGTH];
+
+    // Prompt the user for the filename and search string
+    printf("Enter the name of the file: ");
+    scanf("%s", filename);
+    printf("Enter the search string: ");
+    scanf("%s", search_string);
+
+    FILE *file = fopen(filename, "r");
+
+    if (file == NULL) {
+        printf("Error opening file.\n");
+        return 1;
+    }
+
+    char line[MAX_LINE_LENGTH];
+
+    // Read each line of the file and search for the search string
+    while (fgets(line, MAX_LINE_LENGTH, file) != NULL) {
+        if (strstr(line, search_string) != NULL) {
+            printf("%s", line);
+        }
+    }
+
+    fclose(file);
+
+    return 0;
+}
