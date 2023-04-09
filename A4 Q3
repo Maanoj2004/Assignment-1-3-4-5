@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+// Struct for storing student information
+struct Student {
+    char name[50];
+    int rollNumber;
+    struct tm birthdate;
+    struct tm admissionDate;
+};
+
+// Function to calculate age in years given a birthdate and a date
+int calculateAge(struct tm birthdate, struct tm date) {
+    if (birthdate.tm_year > date.tm_year) {
+        return -1; // Invalid date
+    }
+    int age = date.tm_year - birthdate.tm_year;
+    if (date.tm_mon < birthdate.tm_mon ||
+        (date.tm_mon == birthdate.tm_mon && date.tm_mday < birthdate.tm_mday)) {
+        age--;
+    }
+    return age;
+}
+
+int main() {
+    struct Student student;
+
+    // Read student information from user input
+    printf("Enter student name: ");
+    fgets(student.name, 50, stdin);
+    printf("Enter student roll number: ");
+    scanf("%d", &student.rollNumber);
+    printf("Enter student birthdate (dd-mm-yyyy): ");
+    scanf("%d-%d-%d", &student.birthdate.tm_mday, &student.birthdate.tm_mon, &student.birthdate.tm_year);
+    printf("Enter admission date (dd-mm-yyyy): ");
+    scanf("%d-%d-%d", &student.admissionDate.tm_mday, &student.admissionDate.tm_mon, &student.admissionDate.tm_year);
+
+    // Calculate age at the time of admission
+    int age = calculateAge(student.birthdate, student.admissionDate);
+    if (age == -1) {
+        printf("Invalid birthdate or admission date.\n");
+        return 1;
+    }
+
+    // Print student information and age at time of admission
+    printf("Name: %s", student.name);
+    printf("Roll Number: %d\n", student.rollNumber);
+    printf("Birthdate: %02d-%02d-%04d\n", student.birthdate.tm_mday, student.birthdate.tm_mon, student.birthdate.tm_year);
+    printf("Admission Date: %02d-%02d-%04d\n", student.admissionDate.tm_mday, student.admissionDate.tm_mon, student.admissionDate.tm_year);
+    printf("Age at time of admission: %d years\n", age);
+
+    return 0;
+}
