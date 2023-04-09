@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_LINE_LENGTH 256
+
+int main() {
+    FILE *input_file = fopen("input.txt", "r");
+    FILE *error_log_file = fopen("error_log.txt", "w");
+
+    char line[MAX_LINE_LENGTH];
+
+    while (fgets(line, MAX_LINE_LENGTH, input_file) != NULL) {
+        if (strstr(line, "error") != NULL) {
+            fputs(line, error_log_file);
+        }
+    }
+
+    fclose(input_file);
+    fclose(error_log_file);
+
+    // Read and print the contents of error_log.txt
+    error_log_file = fopen("error_log.txt", "r");
+
+    printf("Contents of error_log.txt:\n");
+
+    while (fgets(line, MAX_LINE_LENGTH, error_log_file) != NULL) {
+        printf("%s", line);
+    }
+
+    fclose(error_log_file);
+
+    return 0;
+}
